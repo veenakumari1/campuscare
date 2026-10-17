@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+/* Palette sampled from the reference: warm brown backdrop, white cards, one orange accent. */
+:root {
+  --background: #e9e1d7;
+  --foreground: #3a2e28;
+  --brown-top: #5c3a30;
+  --brown-mid: #7b4f46;
+  --tan: #99775e;
+  --amber: #a76845;
+  --peach: #e1a581;
+  --ember: #511105;
+  --night: #e9e1d7;
+  --ink: #2a1a16;
+  --paper: #fffffd;
+  --orange: #c8805a;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-urbanist);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: var(--night);
+}
+
+/* Soft, out-of-focus warm interior, like the reference's blurred photo. */
+body {
+  min-height: 100vh;
+  background-color: #e9e1d7;
+  background-image:
+    radial-gradient(45% 40% at 90% 15%, rgb(232 196 168 / 0.55), transparent 70%),
+    radial-gradient(50% 45% at 5% 90%, rgb(222 182 152 / 0.45), transparent 70%),
+    radial-gradient(60% 40% at 50% 0%, rgb(255 255 255 / 0.35), transparent 70%),
+    linear-gradient(180deg, #d9cfc3 0%, #e9e1d7 55%, #f4efe8 100%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-urbanist), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--orange);
+  color: #fff;
+}
+
+/* ---- Glass system ---------------------------------------------------- */
+
+.glass {
+  background: rgb(255 255 255 / 0.38);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  backdrop-filter: blur(26px) saturate(1.1);
+  -webkit-backdrop-filter: blur(26px) saturate(1.1);
+  box-shadow:
+    0 30px 60px -34px rgb(120 90 70 / 0.35),
+    inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+
+.glass-strong {
+  background: rgb(255 255 255 / 0.5);
+  border: 1px solid rgb(255 255 255 / 0.8);
+  backdrop-filter: blur(32px) saturate(1.15);
+  -webkit-backdrop-filter: blur(32px) saturate(1.15);
+  box-shadow:
+    0 36px 70px -36px rgb(120 90 70 / 0.4),
+    inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+
+/* Solid white inner card, as the reference's Alarm card. */
+.paper {
+  background: rgb(255 255 253 / 0.96);
+  color: var(--ink);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  box-shadow: 0 14px 30px -18px rgb(120 90 70 / 0.45);
+}
+
+@keyframes float-a {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-8px) rotate(var(--r, 0deg)); }
+}
+
+.float-a {
+  animation: float-a 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-a { animation: none; }
+}
+
+select option {
+  color: var(--ink);
+  background: #fff;
+}
+
+/* Custom cursor: sirf mouse devices pe default cursor hide */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, input, textarea, select, label { cursor: none; }
+}
